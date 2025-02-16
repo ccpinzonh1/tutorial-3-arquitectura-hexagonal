@@ -28,7 +28,19 @@ class Rut(ObjetoValor):
     numero: int
     ciudad: Ciudad
 
+@dataclass(frozen=True)
+class TokenSeguridad(ObjetoValor):
+    token: str
+
+@dataclass
 class MetodosPago(ObjetoValor):
-    # TODO
-    ...
+    tipo: str  # Ejemplo: 'tarjeta de crédito', 'débito', 'transferencia bancaria'
+    nombre: str
+    token_seguridad: TokenSeguridad
+
+    def actualizar_nombre(self, nuevo_nombre: str):
+        self.nombre = nuevo_nombre
+
+    def obtener_token(self) -> str:
+        return self.token_seguridad.token
 
